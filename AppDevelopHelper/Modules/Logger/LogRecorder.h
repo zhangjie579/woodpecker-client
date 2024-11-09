@@ -11,10 +11,10 @@
 
 //i/o
 extern NSString * const kLogRecorderUpdateNotification;
-extern NSString * const kLogRecorderUpdateNotificationNewItemKey;
+//extern NSString * const kLogRecorderUpdateNotificationNewItemKey;
 //console
-extern NSString * const kLogRecorderConsoleUpdateNotification;
-extern NSString * const kLogRecorderUpdateNotificationNewConsoleItemsKey;
+//extern NSString * const kLogRecorderConsoleUpdateNotification;
+//extern NSString * const kLogRecorderUpdateNotificationNewConsoleItemsKey;
 
 
 @interface LogRecorder : NSObject

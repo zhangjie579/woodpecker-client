@@ -10,10 +10,10 @@
 #import "EnvtService.h"
 
 NSString * const kLogRecorderUpdateNotification                     = @"kLogRecorderUpdateNotification";
-NSString * const kLogRecorderUpdateNotificationNewItemKey           = @"newItem";
+//NSString * const kLogRecorderUpdateNotificationNewItemKey           = @"newItem";
 
-NSString * const kLogRecorderConsoleUpdateNotification              = @"kLogRecorderConsoleUpdateNotification";
-NSString * const kLogRecorderUpdateNotificationNewConsoleItemsKey   = @"list";
+//NSString * const kLogRecorderConsoleUpdateNotification              = @"kLogRecorderConsoleUpdateNotification";
+//NSString * const kLogRecorderUpdateNotificationNewConsoleItemsKey   = @"list";
 
 @interface LogRecorder ()
 
