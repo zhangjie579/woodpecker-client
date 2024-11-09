@@ -542,35 +542,35 @@ static NSInteger const kTagIcon = 102;
 
 - (void)viewDidAppear {
     [super viewDidAppear];
-    [self performSelector:@selector(showRateRoutineIfNeeded) withObject:nil afterDelay:2.0];
+//    [self performSelector:@selector(showRateRoutineIfNeeded) withObject:nil afterDelay:2.0];
 }
 
-- (void)showRateRoutineIfNeeded {
-    if([Preference hasRated]) {
-        return;
-    }
-    static BOOL hasShow = NO;
-    if(hasShow) {
-        return;
-    }
-    NSInteger launchTimes = [Preference getLaunchTimes];
-    BOOL shouldShow = NO;
-    NSInteger firstTime = 5;
-    NSInteger secondTime = 50;
-    NSInteger thirdTime = 100;
-#if DEBUG
-    firstTime = 5;
-    secondTime = 8;
-    thirdTime = 10;
-#endif
-    if(launchTimes == firstTime || launchTimes == secondTime || launchTimes == thirdTime) {
-        shouldShow = YES;
-    }
-    if(shouldShow) {
-        hasShow = YES;
-        RateViewController *rateVC = [[RateViewController alloc] init];
-        [self presentViewControllerAsModalWindow:rateVC];
-    }
-}
+//- (void)showRateRoutineIfNeeded {
+//    if([Preference hasRated]) {
+//        return;
+//    }
+//    static BOOL hasShow = NO;
+//    if(hasShow) {
+//        return;
+//    }
+//    NSInteger launchTimes = [Preference getLaunchTimes];
+//    BOOL shouldShow = NO;
+//    NSInteger firstTime = 5;
+//    NSInteger secondTime = 50;
+//    NSInteger thirdTime = 100;
+//#if DEBUG
+//    firstTime = 5;
+//    secondTime = 8;
+//    thirdTime = 10;
+//#endif
+//    if(launchTimes == firstTime || launchTimes == secondTime || launchTimes == thirdTime) {
+//        shouldShow = YES;
+//    }
+//    if(shouldShow) {
+//        hasShow = YES;
+//        RateViewController *rateVC = [[RateViewController alloc] init];
+//        [self presentViewControllerAsModalWindow:rateVC];
+//    }
+//}
 
 @end
