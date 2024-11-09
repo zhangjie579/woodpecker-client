@@ -87,13 +87,17 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
     return sharedObserver;
 }
 
+//+ (void)load {
+//    [ADHNetworkObserver injectIntoAllNSURLConnectionDelegateClasses];
+//}
+
 //start
 - (void)start
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         [ADHNetworkObserver injectIntoAllNSURLConnectionDelegateClasses];
-    });
+//    });
     self.enabled = YES;
 }
 
@@ -239,8 +243,8 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
 
 + (void)injectIntoNSURLConnectionCancel
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         Class class = [NSURLConnection class];
         SEL selector = @selector(cancel);
         SEL swizzledSelector = [ADHNetworkUtility swizzledSelectorForSelector:selector];
@@ -255,13 +259,13 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         class_addMethod(class, swizzledSelector, implementation, method_getTypeEncoding(originalCancel));
         Method newCancel = class_getInstanceMethod(class, swizzledSelector);
         method_exchangeImplementations(originalCancel, newCancel);
-    });
+//    });
 }
 
 + (void)injectIntoNSURLSessionTaskResume
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         // In iOS 7 resume lives in __NSCFLocalSessionTask
         // In iOS 8 resume lives in NSURLSessionTask
         // In iOS 9 resume lives in __NSCFURLSessionTask
@@ -294,13 +298,13 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         class_addMethod(class, swizzledSelector, implementation, method_getTypeEncoding(originalResume));
         Method newResume = class_getInstanceMethod(class, swizzledSelector);
         method_exchangeImplementations(originalResume, newResume);
-    });
+//    });
 }
 
 + (void)injectIntoNSURLConnectionAsynchronousClassMethod
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         Class class = objc_getMetaClass(class_getName([NSURLConnection class]));
         SEL selector = @selector(sendAsynchronousRequest:queue:completionHandler:);
         SEL swizzledSelector = [ADHNetworkUtility swizzledSelectorForSelector:selector];
@@ -334,13 +338,13 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         };
         
         [ADHNetworkUtility replaceImplementationOfKnownSelector:selector onClass:class withBlock:asyncSwizzleBlock swizzledSelector:swizzledSelector];
-    });
+//    });
 }
 
 + (void)injectIntoNSURLConnectionSynchronousClassMethod
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         Class class = objc_getMetaClass(class_getName([NSURLConnection class]));
         SEL selector = @selector(sendSynchronousRequest:returningResponse:error:);
         SEL swizzledSelector = [ADHNetworkUtility swizzledSelectorForSelector:selector];
@@ -376,13 +380,13 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         };
         
         [ADHNetworkUtility replaceImplementationOfKnownSelector:selector onClass:class withBlock:syncSwizzleBlock swizzledSelector:swizzledSelector];
-    });
+//    });
 }
 
 + (void)injectIntoNSURLSessionAsyncDataAndDownloadTaskMethods
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         Class class = [NSURLSession class];
         
         // The method signatures here are close enough that we can use the same logic to inject into all of them.
@@ -425,13 +429,13 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
             
             [ADHNetworkUtility replaceImplementationOfKnownSelector:selector onClass:class withBlock:asyncDataOrDownloadSwizzleBlock swizzledSelector:swizzledSelector];
         }
-    });
+//    });
 }
 
 + (void)injectIntoNSURLSessionAsyncUploadTaskMethods
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
         Class class = [NSURLSession class];
         
         // The method signatures here are close enough that we can use the same logic to inject into both of them.
@@ -469,7 +473,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
             
             [ADHNetworkUtility replaceImplementationOfKnownSelector:selector onClass:class withBlock:asyncUploadTaskSwizzleBlock swizzledSelector:swizzledSelector];
         }
-    });
+//    });
 }
 
 + (NSString *)mechansimFromClassMethod:(SEL)selector onClass:(Class)class
